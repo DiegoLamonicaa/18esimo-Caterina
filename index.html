@@ -42,6 +42,8 @@ body{background:#e2c9b2;font-family:'Cormorant Garamond',Georgia,serif;color:var
 .big{font-size:44cqw;line-height:.9}
 .name{font-size:22cqw;line-height:.85;margin:-6cqw 0 1cqh;position:relative;z-index:2}
 .name+.l{margin-top:0}
+.hint .ch{opacity:0;animation:ch .15s forwards}
+@keyframes ch{to{opacity:1}}
 </style></head><body>
 <div class="bgfill"></div><div class="stage" id="stage"><div class="tw"></div>
 
@@ -68,19 +70,19 @@ body{background:#e2c9b2;font-family:'Cormorant Garamond',Georgia,serif;color:var
 <script>
 // ====== DA PERSONALIZZARE ======
 
-const LOCATION_URL = "https://share.google/sh1fkPe3ezGjeD4NH"; // sito della location
+const LOCATION_URL = "https://www.paradisosalaricevimenti.it"; // sito della location
 // ================================
 document.getElementById('loc').href=LOCATION_URL;
 const env=document.getElementById('env'),p1=document.getElementById('p1'),p2=document.getElementById('p2');
 
+// scritta che compare lettera dopo lettera
+(function(){const h=document.querySelector('.hint'),n=[...h.childNodes];h.setAttribute('aria-label',h.textContent);h.textContent='';let i=0;
+ n.forEach(x=>{if(x.nodeType===3){[...x.textContent].forEach(c=>{const e=document.createElement('span');e.className='ch';e.setAttribute('aria-hidden','true');e.textContent=c;e.style.animationDelay=(.4+i++*.05)+'s';h.appendChild(e)})}else h.appendChild(x.cloneNode())})})();
 env.onclick=()=>{
-  env.classList.add('open');
-  setTimeout(()=>env.classList.add('go'),650);
-  setTimeout(()=>{
-    p1.style.opacity=0;p1.style.pointerEvents='none';
-    p2.style.opacity=1;p2.style.pointerEvents='auto';
-    p2.classList.add('show')
-  },1250)
+  p1.style.transition=p2.style.transition='none';
+  p1.style.opacity=0;p1.style.pointerEvents='none';
+  p2.style.opacity=1;p2.style.pointerEvents='auto';
+  p2.classList.add('show')
 };
 
 </script></body></html>
